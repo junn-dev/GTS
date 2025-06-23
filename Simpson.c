@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
-#define f(x) (pow(sin(x), 4) + (x) * (x) * (x))
+#define f(x) sin(x) / x
 
 //float P(float x, float a[], int n) {
 //	int i;

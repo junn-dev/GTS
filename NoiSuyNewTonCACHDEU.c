@@ -3,65 +3,74 @@
 
 #define MAX 100
 
-// Hàm f(x) = 2^x / (x^2 + 1)
-float fx(float x) {
-    return pow(2, x) / (x * x + 1);
+double fx(double x) {
+    return pow(2, x) / (x * x + 1); 
 }
 
-// T?o b?ng sai phân ti?n
-void tao_bang_sai_phan(float f[][MAX], int n) {
-    int i, j;
-    for (j = 1; j < n; j++) {
-        for (i = 0; i < n - j; i++) {
-            f[i][j] = f[i + 1][j - 1] - f[i][j - 1];
-        }
-    }
-}
-
-// Tính giai th?a
 int giaithua(int n) {
     if (n <= 1) return 1;
     return n * giaithua(n - 1);
 }
 
-// N?i suy Newton ti?n
-float noi_suy_newton(float x[], float f[][MAX], int n, float xp) {
-    float h = x[1] - x[0];
-    float p = (xp - x[0]) / h;
-
-    float kq = f[0][0];
-    float p_tich = 1.0;
-    int i;
-
-    for (i = 1; i < n; i++) {
-        p_tich *= (p - (i - 1));
-        kq += (p_tich * f[0][i]) / giaithua(i);
-    }
-
-    return kq;
-}
-
 int main() {
-    int n, i;
-    float x[MAX], f[MAX][MAX], xp, ketqua;
+    int n, i, j;
+    double x[MAX], y[MAX], f[MAX][MAX], xp, h, p, ketqua, p_tich;
 
     printf("Nhap so diem n: ");
     scanf("%d", &n);
 
-    printf("Nhap cac moc x (deu cach):\n");
+
     for (i = 0; i < n; i++) {
         printf("x[%d] = ", i);
-        scanf("%f", &x[i]);
-        f[i][0] = fx(x[i]); 
+        scanf("%lf", &x[i]);
+        
+        // Neu nhap y(x) theo bang
+        printf("y[%d] = ", i);
+        scanf("%lf", &y[i]);
+        
+        // Neu tinh theo f(x)
+//        y[i] = fx(x[i]);
+//        printf("y[%d] = f(%.2lf) = %.6lf\n", i, x[i], y[i]);
+
+        f[i][0] = y[i];
     }
 
-    tao_bang_sai_phan(f, n);
+    h = x[1] - x[0];
+    for (i = 1; i < n - 1; i++) {
+        if (fabs((x[i+1] - x[i]) - h) > 1e-6) {
+            printf("Loi: x khong cach deu!\n");
+            return 1;
+        }
+    }
 
-    printf("Nhap x can noi suy: ");
-    scanf("%f", &xp);
+    for (j = 1; j < n; j++) {
+        for (i = 0; i < n - j; i++) {
+            f[i][j] = f[i + 1][j - 1] - f[i][j - 1];
+        }
+    }
 
-    ketqua = noi_suy_newton(x, f, n, xp);
-    printf("f(%.4f) ~= %.6f\n", xp, ketqua);
+    printf("\nBang sai phan tien:\n");
+    for (i = 0; i < n; i++) {
+        printf("x = %.2lf\t", x[i]);
+        for (j = 0; j < n - i; j++) {
+            printf("%.6lf\t", f[i][j]);
+        }
+        printf("\n");
+    }
+
+    printf("\nNhap gia tri x can noi suy: ");
+    scanf("%lf", &xp);
+
+    p = (xp - x[0]) / h;
+    ketqua = f[0][0];
+    p_tich = 1.0;
+
+    for (i = 1; i < n; i++) {
+        p_tich *= (p - (i - 1));
+        ketqua += (p_tich * f[0][i]) / giaithua(i);
+    }
+
+    printf("\n=> Gia tri noi suy tai x = %.6lf la y = %.6lf\n", xp, ketqua);
 
     return 0;
 }

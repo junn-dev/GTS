@@ -2,7 +2,7 @@
 #include <math.h>
 
 float g(float x) {
-    return sqrt(x) + sin(x) - 10;
+    return sqrt(2 * x + 5);
 }
 
 int main() {
@@ -16,6 +16,7 @@ int main() {
     do {
         x_new = g(x_old);
         delta = fabs(x_new - x_old);
+        printf("%-10d %-15.6f %-15.6f %-15.6f\n", count, x_old, x_new, delta);
         x_old = x_new;
         count++;
     } while (delta > eps && count < max_iter);

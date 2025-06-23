@@ -2,7 +2,7 @@
 #include <math.h>
 
 double f(double x) {
-    return sqrt(x) + sin(x) - 10;
+    return x * x * x - x - 1;
 }
 
 int main() {
@@ -16,19 +16,20 @@ int main() {
     }
 
     double c;
-    int count = 1;
+    double saiso;
+    int count = 0;
     do {
         c = (a + b) / 2;
+        saiso = fabs(b - a);
 
         if (f(c) * f(a) > 0)
             a = c;
         else
             b = c;
 
-        double saiso = fabs(b - a);
         printf("Lan %d:\t x = %.6lf \t f(x) = %.6lf \t sai so: %.6lf\n", count, c, f(c), saiso);
         count++;
-    } while (fabs(b - a) >= eps);
+    } while (saiso >= eps);
 
     printf("\nNghiem gan dung: %.6lf\n", c);
 

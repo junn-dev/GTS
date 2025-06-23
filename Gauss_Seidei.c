@@ -1,16 +1,17 @@
 #include <stdio.h>
 #include <math.h>
 
-#define N 3
+#define N 4
 
 int main() {
     double A[N][N] = {
-        {4, 1, -1},
-        {2, 7, 1},
-        {1, -3, 12}
+        {1, 2, 3, -2},
+        {-2, 1, 2, 3},
+        {3, 2, -1, 2},
+        {2, -3, 2, 1}
     };
-    double b[N] = {3, 19, 31};
-    double x[N] = {0, 0, 0};
+    double b[N] = {6, -8, 4, -8};
+    double x[N] = {0, 0, 0, 0};
 
 //    double A[N][N], b[N], x[N];
 //    
