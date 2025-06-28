@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <math.h>
 
-#define f(x) sin(x) / x
+//#define f(x) sin(x) / x
+#define f(x) (x * x * exp(x)) / (3 * x * x + 8.2)
 
 //float P(float x, float a[], int n) {
 //	int i;
@@ -60,3 +61,26 @@ int main() {
     return 0;
 }
 
+//#include <stdio.h>
+//
+//int main() {
+//    double x[] = {1.0, 1.2, 1.4, 1.6, 1.8};
+//    double y[] = {1.3, 1.41, 1.53, 1.86};
+//    int n = 4;
+//    double target = 1.28;
+//    double h = (x[n] - x[0]) / n;
+//
+//    // I = h/3 [y0 + 4y1 + 2y2 + 4y3 + y4]
+//    double sum = y[0];
+//    int i;
+//    for (i = 1; i < n; i++) {
+//        int factor = (i % 2 == 0) ? 2 : 4;
+//        sum += factor * y[i];
+//    }
+//
+//    double a = (target * 3 / h - sum);
+//
+//    printf("y(%.2lf) = %.4lf\n", x[n], a);
+//
+//    return 0;
+//}
