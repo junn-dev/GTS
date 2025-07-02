@@ -24,7 +24,7 @@ int main() {
             return 1;
         }
 
-        x2 = x1 - fx1 * (x1 - x0) / (fx1 - fx0);
+        x2 = x1 - fx1 * (x1 - x0) / (fx1 - fx0); // x[n + 1] = x[n] - (f(x[n]) * (x[n - d)) / (f(x[n]) - f(d))
 
         printf("%-6d%-15.6lf%-15.6lf%-15.6lf\n", it, x2, f(x2), fabs(x2 - x1));
 

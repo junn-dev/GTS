@@ -1,11 +1,14 @@
 #include <stdio.h>
 #include <math.h>
 
+// Dinh nghia x, y, z, t
 #define f1(x, y, z, t)  6 - 2 * y - 3 * x + 2 * t
 #define f2(x, y, z, t)  -8 + 2 * x - 2 * z - 3 * t
 #define f3(x, y, z, t)  -4 + 3 * x + 2 * y + 2 * t
 #define f4(x, y, z, t)  -8 - 2 * x + 3 * y - 2 * z
 
+
+// Tim max sai so
 double max(double a, double b, double c, double d) {
     double m = a;
     if (b > m) m = b;
@@ -26,9 +29,9 @@ int main() {
 
     do {
         x1 = f1(x0, y0, z0, t0);
-        y1 = f2(x1, y0, z0, t0);
-        z1 = f3(x1, y1, z0, t0);
-        t1 = f4(x1, y1, z1, t0);
+        y1 = f2(x1, y0, z0, t0); // thay x0 -> x1
+        z1 = f3(x1, y1, z0, t0); // thay x0 -> x1, y0 -> y1
+        t1 = f4(x1, y1, z1, t0); // thay x0 -> x1, y0 -> y1, z0 -> z1
 
         e1 = fabs(x1 - x0);
         e2 = fabs(y1 - y0);
@@ -37,7 +40,8 @@ int main() {
         err_r = max(e1, e2, e3, e4);
 
         printf("%-6d%-12.6lf%-12.6lf%-12.6lf%-12.6lf%-12.6lf\n", it, x1, y1, z1, t1, err_r);
-
+        
+        // chua thoa man dieu kien tiep tuc lap
         x0 = x1;
         y0 = y1;
         z0 = z1;

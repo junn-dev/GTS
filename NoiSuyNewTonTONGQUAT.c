@@ -4,7 +4,7 @@
 #define MAX 100
 
 double fx(double x) {
-    return pow(2, x) / (x * x + 1); 
+    return exp(-x) - 6 * x + 7; 
 }
 
 int main() {
@@ -19,12 +19,12 @@ int main() {
         scanf("%lf", &x[i]);
         
         // Neu nhap y(x) theo bang
-        printf("y[%d] = ", i);
-        scanf("%lf", &y[i]);
+//        printf("y[%d] = ", i);
+//        scanf("%lf", &y[i]);
         
         // Neu tinh theo f(x)
-//        y[i] = fx(x[i]);
-//        printf("y[%d] = f(%.2lf) = %.6lf\n", i, x[i], y[i]);
+        y[i] = fx(x[i]);
+        printf("y[%d] = f(%.2lf) = %.6lf\n", i, x[i], y[i]);
 
         diff[i][0] = y[i];
     }

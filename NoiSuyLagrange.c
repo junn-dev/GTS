@@ -33,16 +33,20 @@ int main() {
 
     double result = 0.0;
 
+    // Duyet qua tung diem moc (x_i, y_i)
     for (i = 0; i < n; i++) {
-        double term = y[i];
+        double term = y[i];  // Bat dau voi he so y_i
+
+        // Tinh L_i(x) = tich cac (x - x_j) / (x_i - x_j) voi j # i
         for (j = 0; j < n; j++) {
             if (j != i) {
                 term *= (x_noi_suy - x[j]) / (x[i] - x[j]);
             }
         }
-        result += term;
+
+        result += term; // P(x) += L_i(x) * y_i
     }
-    
+
     printf("Gia tri noi suy tai x = %.2lf la y = %.6lf\n", x_noi_suy, result);
 
     return 0;
